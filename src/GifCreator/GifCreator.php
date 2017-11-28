@@ -110,7 +110,11 @@ class GifCreator
                     $frames[$i] = file_get_contents($frames[$i]);                    
                 }
                 
-                $resourceImg = imagecreatefromstring($frames[$i]);
+		try {
+                	$resourceImg = imagecreatefromstring($frames[$i]);
+		} catch (\Exception $e) {
+			continue;
+		}
                 
                 ob_start();
                 imagegif($resourceImg);
